@@ -150,8 +150,6 @@ margin: 0 auto;
 line-hight: 1.8;
 font-size: 16px;}
 
-html
-{scroll-behavior: smooth;}
 
 .card h3
 {font-size: 18px;
@@ -216,6 +214,35 @@ Professional drone inspections for industrial and commercial operations.
 <p> Location: NationWide </p>
 </section>
 
-</body>
+<script>
+document.querySelector('.button').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const target = document.querySelector('#services');
+    const start = window.pageYOffset;
+    const end = target.offsetTop;
+    const distance = end - start;
+    const duration = 1600; // increase this number to slow it down
+
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        window.scrollTo(0, start + distance * progress);
+
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
+});
+</script>
+
+</body> 
 
 </html>
